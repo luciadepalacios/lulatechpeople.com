@@ -34,16 +34,17 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 6%;
-      background: rgba(10,10,10,0.9);
+      padding: 1rem 6%;
+      background: rgba(10,10,10,0.97);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      min-height: 64px;
     }
-    .nav-logo img { height: 34px; }
+    .nav-logo img { height: 48px; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       color: var(--muted);
@@ -547,20 +548,22 @@
       .nav-links { display: none; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
-        background: rgba(10,10,10,0.98);
-        backdrop-filter: blur(16px);
-        padding: 3rem 6%; gap: 2rem; z-index: 999;
+        position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+        background: rgba(10,10,10,0.99);
+        backdrop-filter: blur(20px);
+        padding: 2.5rem 6%; gap: 1.8rem; z-index: 999;
         border-top: 1px solid var(--border);
+        overflow-y: auto;
       }
-      .nav-links.open a { font-size: 1.1rem; color: var(--text); }
+      .nav-links.open a { font-size: 1.2rem; color: var(--text); letter-spacing: .05em; }
       .nav-links.open a:hover { color: var(--green); }
       .nav-links.open .nav-cta {
         background: var(--green) !important;
         color: #000 !important;
-        padding: .8rem 1.5rem;
+        padding: .9rem 1.8rem;
         display: inline-block;
         width: fit-content;
+        border-radius: 2px;
       }
       .hamburger { display: flex; }
       footer { flex-direction: column; text-align: center; }
@@ -1066,7 +1069,7 @@
           <div class="feat-icon-wrap">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M12 12h.01"/><path d="M8 12h.01"/><path d="M16 12h.01"/></svg>
           </div>
-          <span class="feat-badge">Lula Plug-In</span>
+          <span class="feat-badge">Lula Plug&amp;Play</span>
         </div>
         <h3 class="feat-title">Fractional Head<br/>of People</h3>
         <p class="feat-sub">Tu Head of People sin el coste fijo</p>
@@ -1194,7 +1197,7 @@
               <option value="" disabled selected>Selecciona un servicio</option>
               <option>Lula Radar — Headhunting Estratégico</option>
               <option>Lula Vector — HR Advisory</option>
-              <option>Lula Plug-In — Fractional Head of People</option>
+              <option>Lula Plug&amp;Play — Fractional Head of People</option>
               <option>No lo sé aún, necesito hablar</option>
             </select>
           </div>
@@ -1223,6 +1226,12 @@
     function toggleMenu() {
       document.getElementById('navlinks').classList.toggle('open');
     }
+    // Close menu when clicking a nav link
+    document.querySelectorAll('#navlinks a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('navlinks').classList.remove('open');
+      });
+    });
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').style.background =
         window.scrollY > 50 ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.9)';
